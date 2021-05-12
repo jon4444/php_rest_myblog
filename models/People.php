@@ -18,7 +18,7 @@
     // Get Posts
     public function read() {
       // Create query
-      $query = 'SELECT * FROM ' . $this->table . ' WHERE  id=$id';
+      $query = 'SELECT * FROM ' . $this->table . ' WHERE  id= '. $this->id;
       
       // Prepare statement
       $stmt = $this->conn->prepare($query);

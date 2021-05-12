@@ -6,31 +6,31 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Post.php';
+  include_once '../../models/People.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog post object
-  $post = new Post($db);
+  // Instantiate blog people object
+  $people = new People($db);
 
-  // Get raw posted data
+  // Get raw person data
   $data = json_decode(file_get_contents("php://input"));
 
-  $post->title = $data->title;
-  $post->body = $data->body;
-  $post->author = $data->author;
-  $post->category_id = $data->category_id;
+  $people->id = $data->id;
+  $people->firstname = $data->firstname;
+  $people->lastname = $data->lastname;
+  $people->phone = $data->phone;
 
-  // Create post
-  if($post->create()) {
+  // Create person
+  if($people->create()) {
     echo json_encode(
-      array('message' => 'Post Created')
+      array('message' => 'Person Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Post Not Created')
+      array('message' => 'Person Not Created')
     );
   }
 

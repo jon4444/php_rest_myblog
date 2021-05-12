@@ -10,15 +10,15 @@
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog people object
+  // Instantiate people object
   $people = new People($db);
 
-  // Blog people query
+  //  people query
   $result = $people->read();
   // Get row count
   $num = $result->rowCount();
 
-  // Check if any peoples
+  // Check if any people
   if($num > 0) {
     // People array
     $people_arr = array();
@@ -45,6 +45,6 @@
   } else {
     // No People
     echo json_encode(
-      array('message' => 'No People Found')
+      array('message' => 'No Person Found')
     );
   }

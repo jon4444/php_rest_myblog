@@ -1,13 +1,13 @@
 <?php 
   class Database {
-    // DB Params
+    // database params
     private $host = 'localhost';
-    private $db_name = 'myblog';
-    private $username = 'root';
-    private $password = '';
+    private $db_name = 'jkf13_ci527_test2';
+    private $username = 'jkf13_jon5';
+    private $password = 'Arsenal4**';
     private $conn;
 
-    // DB Connect
+    // databse connection
     public function connect() {
       $this->conn = null;
 

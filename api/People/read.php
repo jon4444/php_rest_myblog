@@ -4,49 +4,47 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Post.php';
+  include_once '../../models/People.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog post object
-  $post = new Post($db);
+  // Instantiate blog people object
+  $people = new People($db);
 
-  // Blog post query
-  $result = $post->read();
+  // Blog people query
+  $result = $people->read();
   // Get row count
   $num = $result->rowCount();
 
-  // Check if any posts
+  // Check if any peoples
   if($num > 0) {
-    // Post array
-    $posts_arr = array();
-    // $posts_arr['data'] = array();
+    // People array
+    $people_arr = array();
+    // $people_arr['data'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
 
-      $post_item = array(
+      $people_item = array(
         'id' => $id,
-        'title' => $title,
-        'body' => html_entity_decode($body),
-        'author' => $author,
-        'category_id' => $category_id,
-        'category_name' => $category_name
+        'firstname' => $firstname,
+        'lastname' => $lastname,
+        'phone' => $phone
       );
 
       // Push to "data"
-      array_push($posts_arr, $post_item);
-      // array_push($posts_arr['data'], $post_item);
+      array_push($people_arr, $people_item);
+      // array_push($people_arr['data'], $people_item);
     }
 
     // Turn to JSON & output
-    echo json_encode($posts_arr);
+    echo json_encode($people_arr);
 
   } else {
-    // No Posts
+    // No People
     echo json_encode(
-      array('message' => 'No Posts Found')
+      array('message' => 'No People Found')
     );
   }

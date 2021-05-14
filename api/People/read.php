@@ -3,8 +3,8 @@
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
 
-  include_once '../../config/Database.php';
-  include_once '../../models/People.php';
+  include_once 'config/Database.php';
+  include_once 'models/People.php';
 
   // Instantiate DB & connect
   $database = new Database();
@@ -43,7 +43,7 @@
     echo json_encode($people_arr);
 
   } else {
-    // No People
+    // No result found 
     echo json_encode(
       array('message' => 'No Person Found')
     );

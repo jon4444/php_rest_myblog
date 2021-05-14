@@ -18,12 +18,15 @@
     // Get Posts
     public function read() {
       // Create query
-      $query = 'SELECT * FROM ' . $this->table . ' WHERE  id= '. $this->id;
-      
-      // Prepare statement
-      $stmt = $this->conn->prepare($query);
+      $query = 'SELECT 
+                id, firstname, lastname, phone
+                FROM ' . $this->table . 
+                'ORDER BY 
+                firstname ASC' ;
+      //$query = 'SELECT * FROM people ORDER BY id DESC';
 
-      // Execute query
+      // prepare and execute 
+      $stmt = $this->conn->prepare($query);
       $stmt->execute();
 
       return $stmt;
@@ -58,12 +61,11 @@
     // Create Post
     public function create() {
           // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET firstname = :firstname, lastname = :lastname, phone = :phone, ';
+          $query = 'INSERT INTO ' . $this->table . ' SET firstname = :firstname, lastname = :lastname, phone = :phone ';
 
-          // Prepare statement
           $stmt = $this->conn->prepare($query);
 
-          // clean the data 
+          // clean up the data 
           $this->firstname = htmlspecialchars(strip_tags($this->firstname));
           $this->lastname = htmlspecialchars(strip_tags($this->lastname));
           $this->phone = htmlspecialchars(strip_tags($this->phone));
@@ -73,7 +75,7 @@
           $stmt->bindParam(':lastname', $this->lastname);
           $stmt->bindParam(':phone', $this->phone);
 
-          // Execute query
+          // execute 
           if($stmt->execute()) {
             return true;
       }

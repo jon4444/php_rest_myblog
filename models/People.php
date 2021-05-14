@@ -35,19 +35,15 @@
     // Get Single Post
     public function read_single() {
           // Create query
-          $query = 'SELECT p.id, p.firstname, p.lastname, p.phone, 
+          $query = 'SELECT id, firstname, lastname, phone, 
                                     FROM ' . $this->table . 
                                     ' WHERE
                                       p.id = ?
                                     LIMIT 0,1';
 
-          // Prepare statement
+          // prepare, bind & execute 
           $stmt = $this->conn->prepare($query);
-
-          // Bind ID
           $stmt->bindParam(1, $this->id);
-
-          // Execute query
           $stmt->execute();
 
           $row = $stmt->fetch(PDO::FETCH_ASSOC);

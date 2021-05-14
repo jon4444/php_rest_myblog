@@ -35,7 +35,7 @@
     // Get Single Post
     public function read_single() {
           // Create query
-          $query = 'SELECT id, firstname, lastname, phone, 
+          $query = 'SELECT firstname, lastname, phone, 
                                     FROM ' . $this->table . 
                                     ' WHERE
                                       p.id = ?
